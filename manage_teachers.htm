@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Teachers | Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* Same styles as Manage Students */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
+            background: #f4f6f9;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 260px;
+            background: #1e3a8a;
+            color: white;
+            position: fixed;
+            height: 100%;
+        }
+        
+        .sidebar-header {
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .sidebar-menu a i {
+            margin-right: 15px;
+            font-size: 1.2rem;
+            width: 25px;
+            text-align: center;
+        }
+        
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: #2563eb;
+        }
+        
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            padding: 40px;
+        }
+        
+        .page-title {
+            font-size: 2.2rem;
+            color: #1e3a8a;
+            margin-bottom: 30px;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .search-box {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 300px;
+        }
+        
+        button {
+            background: #1e3a8a;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #2563eb;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background: #1e3a8a;
+            color: white;
+        }
+        
+        tr:hover {
+            background: #f8f9fc;
+        }
+        
+        .action-btn {
+            padding: 8px 12px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        .edit {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .delete {
+            background: #ef4444;
+            color: white;
+        }
+        
+        .status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .active {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+    </style>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>Admin Panel</h2>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="admin_dashboard.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+            <a href="manage_students.html"><i class="fas fa-user-graduate"></i><span>Manage Students</span></a>
+            <a href="manage_teachers.html" class="active"><i class="fas fa-chalkboard-teacher"></i><span>Manage Teachers</span></a>
+            <a href="#"><i class="fas fa-book"></i><span>Subjects</span></a>
+            <a href="#"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <h1 class="page-title">Manage Teachers</h1>
+        <div class="controls">
+            <input type="text" class="search-box" placeholder="Search by name, email, or department...">
+            <button><i class="fas fa-plus"></i> Add New Teacher</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Subjects</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>T001</td>
+                    <td>Dr. Sarah Williams</td>
+                    <td>sarah@university.edu</td>
+                    <td>Computer Science</td>
+                    <td>Data Structures, AI</td>
+                    <td><span class="status active">Active</span></td>
+                    <td>
+                        <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                        <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>T002</td>
+                    <td>Mr. Ahmed Khan</td>
+                    <td>ahmed@school.edu</td>
+                    <td>Mathematics</td>
+                    <td>Algebra, Calculus</td>
+                    <td><span class="status active">Active</span></td>
+                    <td>
+                        <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                        <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>T003</td>
+                    <td>Ms. Lisa Chen</td>
+                    <td>lisa@school.edu</td>
+                    <td>Physics</td>
+                    <td>Mechanics, Electricity</td>
+                    <td><span class="status pending">Pending</span></td>
+                    <td>
+                        <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                        <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+
+</html>

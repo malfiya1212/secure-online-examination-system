@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Bank | Teacher Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
+            background: #f4f6f9;
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: #1e3a8a;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        header h1 {
+            font-size: 1.8rem;
+        }
+        
+        header nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        header nav a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        .main {
+            padding: 60px 20px;
+        }
+        
+        .page-title {
+            font-size: 2.6rem;
+            color: #1e3a8a;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .search-input {
+            padding: 14px 20px;
+            width: 400px;
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            font-size: 1.1rem;
+        }
+        
+        .add-btn {
+            background: #1e3a8a;
+            color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .add-btn:hover {
+            background: #2563eb;
+        }
+        
+        .questions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+        }
+        
+        .question-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .question-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #1e3a8a;
+            flex: 1;
+        }
+        
+        .question-meta {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .action-btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: white;
+        }
+        
+        .edit {
+            background: #3b82f6;
+        }
+        
+        .delete {
+            background: #ef4444;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            margin-top: 80px;
+        }
+        /* Modal */
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 700px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .close {
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .close:hover {
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+        
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .modal-btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            min-width: 120px;
+        }
+        
+        .save {
+            background: #16a34a;
+            color: white;
+        }
+        
+        .cancel {
+            background: #6b7280;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            header nav a {
+                display: block;
+                margin: 10px 0;
+            }
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .search-input {
+                width: 100%;
+            }
+            .modal-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>Online Exam System</h1>
+            <nav>
+                <a href="teacher_dashboard.html">Dashboard</a>
+                <a href="create_exam.html">Create Exam</a>
+                <a href="teacher_question_bank.html">Question Bank</a>
+                <a href="my_students.html">My Students</a>
+                <a href="teacher_results.html">Results</a>
+                <a href="login.html">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <h1 class="page-title">My Question Bank</h1>
+
+            <div class="controls">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search questions by text, subject, level..." onkeyup="searchQuestions()">
+                <button class="add-btn" onclick="openModal('add')">
+                    <i class="fas fa-plus"></i> Add New Question
+                </button>
+            </div>
+
+            <div class="questions-grid" id="questionsGrid">
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-text">What is the formula for calculating force?</div>
+                        <div class="actions">
+                            <button class="action-btn edit" onclick="openModal('edit', this)"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn delete" onclick="deleteQuestion(this)"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="question-meta">
+                        <strong>Type:</strong> Short Answer<br>
+                        <strong>Subject:</strong> Physics<br>
+                        <strong>Level:</strong> High School<br>
+                        <strong>Created:</strong> Dec 10, 2025
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-text">Which of the following is a prime number?</div>
+                        <div class="actions">
+                            <button class="action-btn edit" onclick="openModal('edit', this)"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn delete" onclick="deleteQuestion(this)"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="question-meta">
+                        <strong>Type:</strong> MCQ<br>
+                        <strong>Subject:</strong> Mathematics<br>
+                        <strong>Level:</strong> High School<br>
+                        <strong>Created:</strong> Dec 5, 2025
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-text">Explain the process of photosynthesis.</div>
+                        <div class="actions">
+                            <button class="action-btn edit" onclick="openModal('edit', this)"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn delete" onclick="deleteQuestion(this)"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="question-meta">
+                        <strong>Type:</strong> Essay<br>
+                        <strong>Subject:</strong> Biology<br>
+                        <strong>Level:</strong> High School<br>
+                        <strong>Created:</strong> Nov 28, 2025
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        © 2025 Online Exam System | Teacher Panel
+    </footer>
+
+    <!-- Add/Edit Question Modal -->
+    <div id="questionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Question</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <form id="questionForm">
+                <div class="form-group">
+                    <label>Question Text <span style="color:red;">*</span></label>
+                    <textarea id="qText" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Question Type <span style="color:red;">*</span></label>
+                    <select id="qType" required>
+                        <option value="">Select Type</option>
+                        <option>MCQ</option>
+                        <option>True/False</option>
+                        <option>Short Answer</option>
+                        <option>Essay</option>
+                        <option>Fill in the Blank</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Subject <span style="color:red;">*</span></label>
+                    <input type="text" id="qSubject" required>
+                </div>
+                <div class="form-group">
+                    <label>Education Level <span style="color:red;">*</span></label>
+                    <select id="qLevel" required>
+                        <option value="">Select Level</option>
+                        <option>Elementary</option>
+                        <option>High School</option>
+                        <option>University</option>
+                        <option>Master's</option>
+                    </select>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="modal-btn cancel" onclick="closeModal()">Cancel</button>
+                    <button type="button" class="modal-btn save" onclick="saveQuestion()">Save Question</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentCard = null;
+        let isEdit = false;
+
+        function openModal(mode, button = null) {
+            const modal = document.getElementById('questionModal');
+            const title = document.getElementById('modalTitle');
+
+            if (mode === 'add') {
+                title.textContent = 'Add New Question';
+                document.getElementById('questionForm').reset();
+                isEdit = false;
+            } else if (mode === 'edit') {
+                title.textContent = 'Edit Question';
+                isEdit = true;
+                currentCard = button.closest('.question-card');
+                const text = currentCard.querySelector('.question-text').textContent.trim();
+                const metaLines = currentCard.querySelector('.question-meta').innerHTML.split('<br>');
+                const type = metaLines[0].replace('<strong>Type:</strong> ', '');
+                const subject = metaLines[1].replace('<strong>Subject:</strong> ', '');
+                const level = metaLines[2].replace('<strong>Level:</strong> ', '');
+
+                document.getElementById('qText').value = text;
+                document.getElementById('qType').value = type;
+                document.getElementById('qSubject').value = subject;
+                document.getElementById('qLevel').value = level;
+            }
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('questionModal').style.display = 'none';
+        }
+
+        function saveQuestion() {
+            const text = document.getElementById('qText').value.trim();
+            const type = document.getElementById('qType').value;
+            const subject = document.getElementById('qSubject').value.trim();
+            const level = document.getElementById('qLevel').value;
+
+            if (!text || !type || !subject || !level) {
+                alert("Please fill all required fields!");
+                return;
+            }
+
+            const metaHTML = `<strong>Type:</strong> ${type}<br>
+                              <strong>Subject:</strong> ${subject}<br>
+                              <strong>Level:</strong> ${level}<br>
+                              <strong>Created:</strong> ${new Date().toLocaleDateString()}`;
+
+            if (isEdit && currentCard) {
+                currentCard.querySelector('.question-text').textContent = text;
+                currentCard.querySelector('.question-meta').innerHTML = metaHTML;
+            } else {
+                const grid = document.getElementById('questionsGrid');
+                const newCard = document.createElement('div');
+                newCard.className = 'question-card';
+                newCard.innerHTML = `
+                    <div class="question-header">
+                        <div class="question-text">${text}</div>
+                        <div class="actions">
+                            <button class="action-btn edit" onclick="openModal('edit', this)"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn delete" onclick="deleteQuestion(this)"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="question-meta">${metaHTML}</div>`;
+                grid.prepend(newCard); // Add to top
+            }
+
+            closeModal();
+            alert("Question saved successfully!");
+        }
+
+        function deleteQuestion(button) {
+            if (confirm("Are you sure you want to delete this question?")) {
+                const card = button.closest('.question-card');
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => card.remove(), 500);
+            }
+        }
+
+        function searchQuestions() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.question-card');
+
+            cards.forEach(card => {
+                const text = card.querySelector('.question-text').textContent.toLowerCase();
+                const meta = card.querySelector('.question-meta').textContent.toLowerCase();
+                const matches = text.includes(input) || meta.includes(input);
+                card.style.display = matches ? 'block' : 'none';
+            });
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            const modal = document.getElementById('questionModal');
+            if (event.target === modal) closeModal();
+        }
+    </script>
+</body>
+
+</html>

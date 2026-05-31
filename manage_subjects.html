@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Subjects | Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
+            background: #f4f6f9;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 260px;
+            background: #1e3a8a;
+            color: white;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+        }
+        
+        .sidebar-header {
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .sidebar-menu a i {
+            margin-right: 15px;
+            font-size: 1.2rem;
+            width: 25px;
+            text-align: center;
+        }
+        
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: #2563eb;
+        }
+        
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            padding: 40px;
+        }
+        
+        .page-title {
+            font-size: 2.2rem;
+            color: #1e3a8a;
+            margin-bottom: 30px;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .search-box {
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 320px;
+            font-size: 1rem;
+        }
+        
+        .add-btn {
+            background: #1e3a8a;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .add-btn:hover {
+            background: #2563eb;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        th,
+        td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background: #1e3a8a;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background: #f8f9fc;
+        }
+        
+        .action-btn {
+            padding: 8px 12px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        .edit {
+            background: #3b82f6;
+        }
+        
+        .delete {
+            background: #ef4444;
+        }
+        /* Modal */
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .close {
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .close:hover {
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .modal-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .save {
+            background: #16a34a;
+            color: white;
+        }
+        
+        .cancel {
+            background: #6b7280;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>Admin Panel</h2>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="admin_dashboard.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+            <a href="manage_students.html"><i class="fas fa-user-graduate"></i><span>Students</span></a>
+            <a href="manage_teachers.html"><i class="fas fa-chalkboard-teacher"></i><span>Teachers</span></a>
+            <a href="manage_subjects.html" class="active"><i class="fas fa-book"></i><span>Manage Subjects</span></a>
+            <a href="#"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <h1 class="page-title">Manage Subjects</h1>
+
+        <div class="controls">
+            <input type="text" class="search-box" id="searchInput" placeholder="Search subjects..." onkeyup="searchTable()">
+            <button class="add-btn" onclick="openModal('add')">
+                <i class="fas fa-plus"></i> Add New Subject
+            </button>
+        </div>
+
+        <table id="subjectsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Subject Name</th>
+                    <th>Education Level</th>
+                    <th>Department/Stream</th>
+                    <th>Assigned Teachers</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>SUB01</td>
+                    <td>Data Structures</td>
+                    <td>University</td>
+                    <td>Computer Science</td>
+                    <td>Dr. Sarah, Prof. Lee</td>
+                    <td>
+                        <button class="action-btn edit" onclick="openModal('edit', this)"><i class="fas fa-edit"></i></button>
+                        <button class="action-btn delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>SUB02</td>
+                    <td>Physics</td>
+                    <td>High School</td>
+                    <td>Natural Science</td>
+                    <td>Mr. Ahmed</td>
+                    <td>
+                        <button class="action-btn edit" onclick="openModal('edit', this)"><i class="fas fa-edit"></i></button>
+                        <button class="action-btn delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>SUB03</td>
+                    <td>Mathematics</td>
+                    <td>Elementary</td>
+                    <td>General</td>
+                    <td>Ms. Fatima</td>
+                    <td>
+                        <button class="action-btn edit" onclick="openModal('edit', this)"><i class="fas fa-edit"></i></button>
+                        <button class="action-btn delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+            </table

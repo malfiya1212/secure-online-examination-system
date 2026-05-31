@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Exams | Online Exam System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
+            background: #f4f6f9;
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: #1e3a8a;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        header h1 {
+            font-size: 1.8rem;
+        }
+        
+        header nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        header nav a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        .main {
+            padding: 60px 20px;
+        }
+        
+        .page-title {
+            font-size: 2.6rem;
+            color: #1e3a8a;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .exams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+        }
+        
+        .exam-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .exam-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .exam-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .exam-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+        
+        .status-badge {
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .open {
+            background: #16a34a;
+        }
+        
+        .upcoming {
+            background: #f59e0b;
+        }
+        
+        .practice {
+            background: #3b82f6;
+        }
+        
+        .exam-meta {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        
+        .exam-card button {
+            background: #16a34a;
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            font-size: 1.2rem;
+            transition: background 0.3s;
+        }
+        
+        .exam-card button:hover {
+            background: #15803d;
+        }
+        
+        .exam-card button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            margin-top: 80px;
+        }
+        /* Modal */
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-icon {
+            font-size: 4rem;
+            color: #16a34a;
+            margin-bottom: 20px;
+        }
+        
+        .modal-buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .modal-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            min-width: 120px;
+        }
+        
+        .confirm {
+            background: #16a34a;
+            color: white;
+        }
+        
+        .cancel {
+            background: #6b7280;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            header nav a {
+                display: block;
+                margin: 10px 0;
+            }
+            .modal-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>Online Exam System</h1>
+            <nav>
+                <a href="student_dashboard.html">Dashboard</a>
+                <a href="results.html">My Results</a>
+                <a href="login.html">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <h1 class="page-title">Available Exams</h1>
+
+            <div class="exams-grid">
+                <!-- Midterm Exam - Upcoming (disabled until open) -->
+                <div class="exam-card">
+                    <div class="exam-header">
+                        <div class="exam-title">Midterm Exam</div>
+                        <span class="status-badge upcoming">Upcoming</span>
+                    </div>
+                    <div class="exam-meta">
+                        <strong>Subject:</strong> Physics<br>
+                        <strong>Duration:</strong> 90 minutes<br>
+                        <strong>Questions:</strong> 50<br>
+                        <strong>Due Date:</strong> January 15, 2026<br>
+                        <strong>Opens:</strong> January 10, 2026
+                    </div>
+                    <button disabled>Start Exam (Opens Jan 10)</button>
+                </div>
+
+                <!-- Chapter Quiz - Open Now -->
+                <div class="exam-card">
+                    <div class="exam-header">
+                        <div class="exam-title">Chapter Quiz</div>
+                        <span class="status-badge open">Open Now</span>
+                    </div>
+                    <div class="exam-meta">
+                        <strong>Subject:</strong> Mathematics<br>
+                        <strong>Duration:</strong> 30 minutes<br>
+                        <strong>Questions:</strong> 20<br>
+                        <strong>Due Date:</strong> January 5, 2026
+                    </div>
+                    <button onclick="startExam('Chapter Quiz - Mathematics', 30)">Start Exam Now</button>
+                </div>
+
+                <!-- Final Exam Prep - Practice -->
+                <div class="exam-card">
+                    <div class="exam-header">
+                        <div class="exam-title">Final Exam Prep</div>
+                        <span class="status-badge practice">Practice</span>
+                    </div>
+                    <div class="exam-meta">
+                        <strong>Subject:</strong> Biology<br>
+                        <strong>Duration:</strong> 120 minutes<br>
+                        <strong>Questions:</strong> 60<br>
+                        <strong>No deadline – Practice anytime</strong>
+                    </div>
+                    <button onclick="startExam('Final Exam Prep - Biology', 120)">Start Practice</button>
+                </div>
+
+                <!-- Weekly Test - Open Now -->
+                <div class="exam-card">
+                    <div class="exam-header">
+                        <div class="exam-title">Weekly Test</div>
+                        <span class="status-badge open">Open Now</span>
+                    </div>
+                    <div class="exam-meta">
+                        <strong>Subject:</strong> English<br>
+                        <strong>Duration:</strong> 45 minutes<br>
+                        <strong>Questions:</strong> 30<br>
+                        <strong>Due Date:</strong> January 3, 2026
+                    </div>
+                    <button onclick="startExam('Weekly Test - English', 45)">Start Exam Now</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        © 2025 Online Exam System | Student Panel
+    </footer>
+
+    <!-- Start Exam Confirmation Modal -->
+    <div id="examModal" class="modal">
+        <div class="modal-content">
+            <i class="fas fa-clipboard-check modal-icon"></i>
+            <h2>Ready to Start Exam?</h2>
+            <p id="examNameDisplay" style="font-size:1.3rem; margin:20px 0; font-weight:bold;"></p>
+            <p>Once you begin, the timer will start immediately.<br>You cannot pause or go back.</p>
+            <div class="modal-buttons">
+                <button class="modal-btn cancel" onclick="closeModal()">Cancel</button>
+                <button class="modal-btn confirm" onclick="confirmStartExam()">Start Exam Now</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedExam = {
+            name: "",
+            duration: 0
+        };
+
+        function startExam(examName, duration) {
+            selectedExam.name = examName;
+            selectedExam.duration = duration;
+            document.getElementById('examNameDisplay').textContent = examName;
+            document.getElementById('examModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('examModal').style.display = 'none';
+        }
+
+        function confirmStartExam() {
+            closeModal();
+            // Navigate to the actual exam page with parameters
+            window.location.href = `exam.html?name=${encodeURIComponent(selectedExam.name)}&duration=${selectedExam.duration}`;
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('examModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+
+</html>

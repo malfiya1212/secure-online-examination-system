@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Results | Online Exam System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
+            background: #f4f6f9;
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: #1e3a8a;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        header h1 {
+            font-size: 1.8rem;
+        }
+        
+        header nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        header nav a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        .main {
+            padding: 60px 20px;
+        }
+        
+        .page-title {
+            font-size: 2.4rem;
+            color: #1e3a8a;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+        
+        .summary-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .summary-card i {
+            font-size: 3rem;
+            color: #3b82f6;
+            margin-bottom: 15px;
+        }
+        
+        .summary-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+        
+        .summary-card .value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        th,
+        td {
+            padding: 18px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background: #1e3a8a;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background: #f8f9fc;
+        }
+        
+        .score {
+            font-weight: bold;
+        }
+        
+        .high {
+            color: #16a34a;
+        }
+        
+        .medium {
+            color: #f59e0b;
+        }
+        
+        .low {
+            color: #ef4444;
+        }
+        
+        .view-btn {
+            background: #3b82f6;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .view-btn:hover {
+            background: #2563eb;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            margin-top: 60px;
+        }
+        
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            header nav a {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>Online Exam System</h1>
+            <nav>
+                <a onclick="goToDashboard()">Dashboard</a>
+                <a>My Results</a>
+                <a href="login.html">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <h1 class="page-title">My Exam Results</h1>
+
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>Total Exams</h3>
+                    <div class="value">14</div>
+                </div>
+                <div class="summary-card">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Average Score</h3>
+                    <div class="value">85%</div>
+                </div>
+                <div class="summary-card">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Passed</h3>
+                    <div class="value">12</div>
+                </div>
+                <div class="summary-card">
+                    <i class="fas fa-times-circle"></i>
+                    <h3>Failed</h3>
+                    <div class="value">2</div>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Exam Title</th>
+                        <th>Subject</th>
+                        <th>Date Taken</th>
+                        <th>Score</th>
+                        <th>Out of</th>
+                        <th>Percentage</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Midterm Exam</td>
+                        <td>Physics</td>
+                        <td>Dec 20, 2025</td>
+                        <td class="score high">92</td>
+                        <td>100</td>
+                        <td class="score high">92%</td>
+                        <td>Passed</td>
+                        <td><button class="view-btn" onclick="alert('Viewing detailed answers...')">View Answers</button></td>
+                    </tr>
+                    <tr>
+                        <td>Chapter Quiz</td>
+                        <td>Mathematics</td>
+                        <td>Dec 15, 2025</td>
+                        <td class="score high">88</td>
+                        <td>100</td>
+                        <td class="score high">88%</td>
+                        <td>Passed</td>
+                        <td><button class="view-btn" onclick="alert('Viewing detailed answers...')">View Answers</button></td>
+                    </tr>
+                    <tr>
+                        <td>Practice Test</td>
+                        <td>Biology</td>
+                        <td>Dec 10, 2025</td>
+                        <td class="score medium">72</td>
+                        <td>100</td>
+                        <td class="score medium">72%</td>
+                        <td>Passed</td>
+                        <td><button class="view-btn" onclick="alert('Viewing detailed answers...')">View Answers</button></td>
+                    </tr>
+                    <tr>
+                        <td>Final Prep Quiz</td>
+                        <td>Chemistry</td>
+                        <td>Dec 5, 2025</td>
+                        <td class="score low">58</td>
+                        <td>100</td>
+                        <td class="score low">58%</td>
+                        <td>Failed</td>
+                        <td><button class="view-btn" onclick="alert('Viewing detailed answers...')">View Answers</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        © 2025 Online Exam System | Student Panel
+    </footer>
+
+    <script>
+        function goToDashboard() {
+            window.location.href = "student_dashboard.html";
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Online Exam System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .hero-about {
+            background: linear-gradient(rgba(30, 41, 59, 0.8), rgba(30, 41, 59, 0.8)), url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+        
+        .team-member {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+        
+        .team-member img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .team-info {
+            padding: 24px;
+        }
+        
+        .stats-section {
+            background: var(--primary);
+            color: white;
+            padding: 60px 0;
+            margin: 80px 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            text-align: center;
+        }
+        
+        .stat-item h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Professional Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="brand">Online Exam System</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="About.html" class="active">About</a>
+                <a href="Contact.html">Contact</a>
+
+                <a href="login.html" class="btn-nav-primary">Go to Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <header class="hero-about">
+        <div class="container">
+            <h1 style="font-size: 3.5rem; margin-bottom: 20px; color: white;">Revolutionizing Assessment</h1>
+            <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto; opacity: 0.9;">We are dedicated to providing secure, reliable, and intelligent examination solutions for institutions worldwide.</p>
+        </div>
+    </header>
+
+    <section style="background: white;">
+        <div class="container">
+
+            <!-- Row 1: Who We Are -->
+            <div style="display: flex; align-items: center; gap: 60px; margin-bottom: 100px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 300px;">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Team collaborating" style="width: 100%; border-radius: 20px; box-shadow: var(--shadow-xl);">
+                </div>
+                <div style="flex: 1; min-width: 300px;">
+                    <h2 style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 24px;">Who We Are</h2>
+                    <p style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 24px;">
+                        Founded by educators and technologists, we understand the challenges of modern assessment. We are a passionate team dedicated to building software that makes testing easier, fairer, and more insightful.
+                    </p>
+                    <p style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.8;">
+                        Our platform is used by leading universities and corporations globally to certify skills and measure progress with precision.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Row 2: Our Technology (Reversed) -->
+            <div style="display: flex; align-items: center; gap: 60px; margin-bottom: 100px; flex-wrap: wrap; flex-direction: row-reverse;">
+                <div style="flex: 1; min-width: 300px;">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" alt="Server technology" style="width: 100%; border-radius: 20px; box-shadow: var(--shadow-xl);">
+                </div>
+                <div style="flex: 1; min-width: 300px;">
+                    <h2 style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 24px;">Cutting-Edge Technology
+                    </h2>
+                    <p style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 24px;">
+                        We leverage the latest in cloud computing and AI to deliver a seamless experience. Our infrastructure scales automatically to handle thousands of concurrent users without a hitch.
+                    </p>
+                    <ul style="list-style: none; display: grid; gap: 16px;">
+                        <li style="display: flex; align-items: center; gap: 12px; color: var(--text-main); font-weight: 500;">
+                            <div style="width: 32px; height: 32px; background: #e0e7ff; color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            Cloud-Native Architecture
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 12px; color: var(--text-main); font-weight: 500;">
+                            <div style="width: 32px; height: 32px; background: #dcfce7; color: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            Bank-Grade Encryption
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 12px; color: var(--text-main); font-weight: 500;">
+                            <div style="width: 32px; height: 32px; background: #ffedd5; color: #ea580c; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            Mobile-First Design
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Row 3: Our Vision -->
+            <div style="display: flex; align-items: center; gap: 60px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 300px;">
+                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80" alt="Student success" style="width: 100%; border-radius: 20px; box-shadow: var(--shadow-xl);">
+                </div>
+                <div style="flex: 1; min-width: 300px;">
+                    <h2 style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 24px;">Our Vision</h2>
+                    <p style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 24px;">
+                        We envision a world where reliable assessment is accessible to everyone, everywhere. By removing technical barriers, we allow educators to focus on what matters most: teaching and inspiring the next generation.
+                    </p>
+                    <a href="Contact.html" class="btn">Get in Touch</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h2>50k+</h2>
+                    <p>Exams Completed</p>
+                </div>
+                <div class="stat-item">
+                    <h2>10k+</h2>
+                    <p>Active Students</p>
+                </div>
+                <div class="stat-item">
+                    <h2>500+</h2>
+                    <p>Institutions</p>
+                </div>
+                <div class="stat-item">
+                    <h2>99.9%</h2>
+                    <p>Uptime</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Online Exam System. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

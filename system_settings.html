@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Settings | Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* Same base styles */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
+            background: #f4f6f9;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 260px;
+            background: #1e3a8a;
+            color: white;
+            position: fixed;
+            height: 100%;
+        }
+        
+        .sidebar-header {
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .sidebar-menu a i {
+            margin-right: 15px;
+            font-size: 1.2rem;
+            width: 25px;
+            text-align: center;
+        }
+        
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: #2563eb;
+        }
+        
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            padding: 40px;
+        }
+        
+        .page-title {
+            font-size: 2.2rem;
+            color: #1e3a8a;
+            margin-bottom: 30px;
+        }
+        
+        .settings-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .settings-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        
+        button {
+            background: #1e3a8a;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>Admin Panel</h2>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="system_settings.html" class="active"><i class="fas fa-cog"></i><span>System Settings</span></a>
+            <a href="#"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <h1 class="page-title">System Settings</h1>
+        <div class="settings-card">
+            <h3>General Settings</h3>
+            <div class="form-group">
+                <label>System Name</label>
+                <input type="text" value="Online Exam System">
+            </div>
+            <div class="form-group">
+                <label>Allow Teacher Registration</label>
+                <select><option>Yes</option><option>No (Admin only)</option></select>
+            </div>
+            <button>Save Changes</button>
+        </div>
+
+        <div class="settings-card">
+            <h3>Security & Backup</h3>
+            <div class="form-group">
+                <label>Last Backup</label>
+                <input type="text" value="Dec 29, 2025 - 10:30 PM" disabled>
+            </div>
+            <button>Backup Database Now</button>
+        </div>
+    </main>
+</body>
+
+</html>
