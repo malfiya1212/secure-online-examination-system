@@ -25,9 +25,10 @@ A comprehensive, production-grade online examination platform built with **PHP, 
 
 ## 🔒 Cybersecurity Concepts Implemented
 
-### 1. Authentication
+### 1. Authentication & Access Control
 - Secure login/logout system with session-based authentication
-- Role-based access control (RBAC) for Admin, Teacher, and Student
+- **Role-based access control (RBAC)** for Admin, Teacher, and Student
+- **Account lockout mechanism** to prevent brute-force attacks
 - Session validation on every protected page
 - **File:** `login.php`, `logout.php`, `db_connect.php`
 
