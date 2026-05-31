@@ -103,7 +103,7 @@ A comprehensive, production-grade online examination platform built with **PHP, 
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/secure-online-examination-system.git
+   git clone https://github.com/malfiya1212/oline-exam2.git
    ```
 
 2. **Start MySQL** (via XAMPP Control Panel or command line)
